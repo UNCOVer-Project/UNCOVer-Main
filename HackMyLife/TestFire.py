@@ -1,23 +1,29 @@
+#azure speech recognition sdk
 import azure.cognitiveservices.speech as speechsdk
 
+#<azure text-to-speech service>
 import os, requests, time
 from xml.etree import ElementTree
 
-import wave
-import contextlib
+try: input = raw_input
+except NameError: pass
+#</azure text-to-speech service>
 
-import pyglet
-
-from imageai.Detection import ObjectDetection
-
+#<azure computer vision service>
+# import requests
 import matplotlib.pyplot as plt
 from PIL import Image
 from io import BytesIO
+#</azure computer vision service>
 
-try: input = raw_input
-except NameError: pass
+#sound-length calculator
+import wave
+import contextlib
 
-path_to_proj = os.getcwd()
+#pyglet for playing sound
+import pyglet
+
+#list to contain detected objects
 objects_detected = []
 
 def AzureVision():
