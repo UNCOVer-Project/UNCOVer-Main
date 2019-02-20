@@ -1,3 +1,12 @@
+# / / / / / / / / / / / / / / / / / / / / /
+#
+# UNBLINDED PROTOTYPE SOFTWARE
+# v0.1
+# Made by Agi, Adhito, Muhammad Teguh, Joshua Evans
+#
+# / / / / / / / / / / / / / / / / / / / / /
+
+
 #azure speech recognition sdk
 import azure.cognitiveservices.speech as speechsdk
 
@@ -24,6 +33,7 @@ import contextlib
 import pyglet
 
 # Play sound file using pyglet module
+# dependency: pyglet
 #
 # @param file_path: path to the audio file
 def Pyglet_playSound(file_path):
@@ -35,6 +45,7 @@ def Pyglet_playSound(file_path):
     print('LOG: Done playing!')
 
 # Algorithm to calculate duration of a sound file
+# dependency: wave, contextlib
 #
 # @param file_path: Path to the sound file
 # @return: time in seconds (integer)
@@ -126,7 +137,7 @@ class TextToSpeech(object):
     def get_token(self):
         print('LOG: Getting token...')
 
-        fetch_token_url = "https://westus.api.cognitive.microsoft.com/sts/v1.0/issueToken"
+        fetch_token_url = "https://southeastasia.api.cognitive.microsoft.com/sts/v1.0/issueToken"
 
         print('LOG: Fetching token at ' + fetch_token_url)
 
@@ -142,7 +153,7 @@ class TextToSpeech(object):
     def save_audio(self, filename_to_save):
         print('LOG: Processing audio...')
 
-        base_url = 'https://westus.tts.speech.microsoft.com/'
+        base_url = 'https://southeastasia.tts.speech.microsoft.com/'
 
         print('LOG: Using speech base url ' + base_url)
 
@@ -181,7 +192,7 @@ class TextToSpeech(object):
 
 # Creates an instance of a speech config with specified subscription key and service region.
 # Replace with your own subscription key and service region (e.g., "westus").
-speech_key, speech_service_region = "c7468215707f4a53a65709ca3491553b", "westus"
+speech_key, speech_service_region = "d7f48f6fc6d34d6bae9b72814bbd0519", "southeastasia"
 
 print('LOG: Using speech subscription key ' + speech_key)
 print('LOG: Speech service region at ' + speech_service_region)
@@ -242,7 +253,7 @@ while exit_status == 0:
                 tts_text_candidate = tts_text_candidate + each_object + ', '
 
             # subscription key for Azure tts service
-            tts_subscription_key = "c7468215707f4a53a65709ca3491553b"
+            tts_subscription_key = "d7f48f6fc6d34d6bae9b72814bbd0519"
 
             # begin text-to-speech process using Azure tts service
             app = TextToSpeech(tts_subscription_key, tts_text_candidate)
