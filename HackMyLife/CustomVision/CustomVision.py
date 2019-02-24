@@ -3,11 +3,11 @@ from azure.cognitiveservices.vision.customvision.training import CustomVisionTra
 from azure.cognitiveservices.vision.customvision.training.models import ImageFileCreateEntry, Region
 
 # Change endpoint location according to Azure account
-ENDPOINT = "https://southcentralus.api.cognitive.microsoft.com"
+ENDPOINT = "https://southeastasia.api.cognitive.microsoft.com"
 
 # Replace with a valid key
-training_key = "cd2b555f55f245399b4012a9aa657f90"
-prediction_key = "69b8a6b4dd6a47ed8f7ca4be7d2265f2"
+training_key = "6ad939516c234dfc8e7de03935037264"
+prediction_key = "4b0ab4fa945a41b187c5fcb6c4ea5cdb"
 
 # Now there is a trained endpoint that can be used to train
 trainer = CustomVisionTrainingClient(training_key, endpoint=ENDPOINT)
@@ -17,7 +17,9 @@ obj_detection_domain = next(domain for domain in trainer.get_domains() if domain
 
 # Create a new project
 print ("Creating project...")
-project = trainer.create_project("My Detection Project", domain_id=obj_detection_domain.id)
+project = trainer.create_project("Test Project", domain_id=obj_detection_domain.id)
+
+print(project.id)
 
 # Make two tags in the new project
 fork_tag = trainer.create_tag(project.id, "fork")
