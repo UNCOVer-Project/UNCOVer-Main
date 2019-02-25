@@ -8,7 +8,7 @@ According to Erin Brady et al., the most common accessibility issues encountered
 
 Other problem that are faced by blind people are locating object. Popular culture depicts that if one of the senses of a person stops working, the others become sharper. Blind people may rely more on their other senses and develop a strong memory, but this may not be well enough to identify object and their location. Blind people must memorise the location of every obstacle or item in their home environment. Any changes in location can put burden to the person to search the item again with varying difficulties.
 
-Despite of the challanges faced by the blind, the most valuable thing for a disabled person is gaining independence. A blind person can lead an independent life with some specifically designed adaptive things for them. There are lots of adaptive equipment that can enable a blind person to live their life independently but they are not easily available in the local shops or markets. They have to put much effort to get each equipment that can take them one step closer towards independence (Lalit Kumar, Daily Life Problems Faced by Blind People)<sup>3</sup>.
+Despite of the challenges faced by the blind, the most valuable thing for a disabled person is gaining independence. A blind person can lead an independent life with some specifically designed adaptive things for them. There are lots of adaptive equipment that can enable a blind person to live their life independently but they are not easily available in the local shops or markets. They have to put much effort to get each equipment that can take them one step closer towards independence (Lalit Kumar, Daily Life Problems Faced by Blind People)<sup>3</sup>.
 
 Computers and the Internet are two of the most significant developments since the invention of braille, as for the first time ever many blind and partially sighted people have access to the same wealth of information as sighted people and on the same terms. Computing technology is promising greater accessibility to information, services, and society. (Anne Jarry et al., Blind Adults’ Perspectives on Technical Problems and Solutions When Using Technology)<sup>4</sup>.
 
@@ -29,6 +29,8 @@ UNCOVer core components consists of a single camera positioned to mimic user's f
 
 UNCOVer's prototype will use a single Raspberry Pi 3 Model B to handle and process the information. To detect object and recognise characters, UNCOVer will be powered by Azure Cognitive Service for reliable object & character recognition and speech services to deliver the best possible experience.
 
+With all of those feaures, it is hoped that UNCOVer will give blind people independence in identifying and locating object, and reading text so they can enjoy life as much as normal people, making them *uncover* the countless information of the world.
+
 ## HOW UNCOVer WORKS
 
 **[work in progress]**
@@ -39,8 +41,9 @@ While the device is on, the microphone will constantly monitor for user's voice.
 Alternatively, if a finger pointing to a specific object is detected, then the device will speak the pointed object's name. After that, the microphone will continue to monitor user commands. If the user say "Turn off", then the device will stop monitoring and turn off. Else, the device will keep monitoring and work as described.
 
 ![How it illustration](https://raw.githubusercontent.com/agikarasugi/HackMyLife/master/HackMyLifeGraphic/illustration_small.jpg)
+
 Illustration: if a finger is detected, as illustrated from the image above, the pointed object will be the only that is described by the UNCOVer. In Above scenario UNCOVer will say "The object that you are pointing is computer mouse". 
 
 ***
 
-For additional information, please visit out project website: https://unblinded.github.io
+For additional information, please visit out project website: https://uncover-project.github.io/
