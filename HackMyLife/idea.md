@@ -23,13 +23,17 @@ UNCOVer is an accessibility tool for sightless person that is worn like a sungla
 
 ![UNCOVer illustration](https://raw.githubusercontent.com/agikarasugi/HackMyLife/master/HackMyLifeGraphic/UNBLINDED%20concept_smaller.png)
 
+*Image: UNCOVer product concept*
+
 UNCOVer differentiates itself from the currently available products by offering multiple object detection complete with object name and location, powerful and precise object description by detecting the object pointed by the user's finger, and optical character recognition that enables the user to "hear" the characters, all in a single, easy-to-use package.
+
+*[insert picture of camera, microphone, earphone, raspi, and sunglasses here!!!]*
 
 UNCOVer core components consists of a single camera positioned to mimic user's field of view. This camera will be used to capture an image of the objects and texts to be analysed. To facilitate user with easy and simple to use interface, UNCOVer will feature a microphone powered by speech recognition so that the user can give command directly by speaking without pressing any button. All information will be given to the user as speech via the provided earphone.
 
 UNCOVer's prototype will use a single Raspberry Pi 3 Model B to handle and process the information. To detect object and recognise characters, UNCOVer will be powered by Azure Cognitive Service for reliable object & character recognition and speech services to deliver the best possible experience.
 
-With all of those feaures, it is hoped that UNCOVer will give blind people independence in identifying and locating object, and reading text so they can enjoy life as much as normal people, making them *uncover* the countless information of the world.
+With all of those feaures, it is hoped that UNCOVer will give blind people independence in identifying and locating object, and reading text so they can enjoy life as much as normal people, making them <strong>*uncover*</strong> the countless information of the world.
 
 ## HOW UNCOVer WORKS
 
