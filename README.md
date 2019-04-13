@@ -24,19 +24,38 @@ UNCOVer is a project to help sightless person to see objects and also reading te
 
 <h4>Used Dependencies</h4>
 Install the following dependencies via pip:
+  <br/>
   pip install tensorflow
+  <br/>
   pip install numpy
+  <br/>
   pip install scipy
+  <br/>
   pip install pillow
+  <br/>
   pip install matplotlib
+  <br/>
   pip install h5py
+  <br/>
   pip install keras
+  <br/>
   pip install https://github.com/OlafenwaMoses/ImageAI/releases/download/2.0.2/imageai-2.0.2-py3-none-any.whl
+  <br/>
   pip install azure-cognitiveservices-speech
+  <br/>
   pip install requests
+  <br/>
   pip install pyglet
+  <br/>
 
 <h4>Material & documentations:</h4>
+  <br/>
+  <h5>A Quickstart guide on using Azure Speech Services on Python</h5>
   https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/quickstart-python
-  https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/quickstart-python-text-to-speech\
+  <br/>
+  <h5>A Quickstart guide on using Azure Text-to-Speech on Python</h5>
+  https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/quickstart-python-text-to-speech
+  <br/>
+  <h5>Object detection</h5>
   https://towardsdatascience.com/object-detection-with-10-lines-of-code-d6cb4d86f606
+  <br/>
