@@ -7,36 +7,43 @@
 # / / / / / / / / / / / / / / / / / / / / /
 
 
-#azure speech recognition sdk
+# azure speech recognition sdk
 import azure.cognitiveservices.speech as speechsdk
 
-#<azure text-to-speech service>
-import os, requests, time
+# <azure text-to-speech service>
+import os
+import requests
+import time
 from xml.etree import ElementTree
 
-try: input = raw_input
-except NameError: pass
-#</azure text-to-speech service>
+try:
+    input = raw_input
+except NameError:
+    pass
+# </azure text-to-speech service>
 
-#<azure computer vision service>
+# <azure computer vision service>
 # import requests
-import matplotlib.pyplot as plt
-from PIL import Image
-from io import BytesIO
-#</azure computer vision service>
+# import matplotlib.pyplot as plt
+# from PIL import Image
+# from io import BytesIO
+# </azure computer vision service>
 
-#sound-length calculator
+# sound-length calculator
 import wave
 import contextlib
 
-#pyglet for playing sound
+# pyglet for playing sound
 import pyglet
 
-# Play sound file using pyglet module
-# dependency: pyglet
-#
-# @param file_path: path to the audio file
+
 def Pyglet_playSound(file_path):
+    '''
+    Play sound file using pyglet module
+    dependency: pyglet
+
+    @param file_path: path to the audio file
+    '''
     print('LOG: Playing audio file: ' + file_path + '...')
 
     sound = pyglet.resource.media(file_path, streaming=False)
@@ -44,14 +51,17 @@ def Pyglet_playSound(file_path):
 
     print('LOG: Done playing!')
 
-# Algorithm to calculate duration of a sound file
-# dependency: wave, contextlib
-#
-# @param file_path: Path to the sound file
-# @return: time in seconds (integer)
+
 def Calculate_soundFile_duration(file_path):
-    print('LOG: Calculating duration of ' + file_path + '...' )
-    with contextlib.closing(wave.open(file_path,'r')) as f:
+    '''
+    Algorithm to calculate duration of a sound file
+    dependency: wave, contextlib
+
+    @param file_path: Path to the sound file
+    @return: time in seconds (integer)
+    '''
+    print('LOG: Calculating duration of ' + file_path + '...')
+    with contextlib.closing(wave.open(file_path, 'r')) as f:
         frames = f.getnframes()
         rate = f.getframerate()
         time_ = frames / float(rate)
@@ -60,13 +70,20 @@ def Calculate_soundFile_duration(file_path):
 
     return time_
 
-# Azure Computer Vision API
-#
-# @param image_path: Set image_path to the local path of an image that you want
-# to analyze.
-# @return: A JSON response in dictionary format
+
 def AzureVision(image_path):
-    print('LOG: Commencing image recognition of ' + image_path + '\nusing Azure Computer Vision API...')
+    '''
+    Azure Computer Vision API
+
+    @param image_path: Set image_path to the local path
+        of an image that you want
+    to analyze.
+    @return: A JSON response in dictionary format
+    '''
+    print(
+        'LOG: Commencing image recognition of '
+        + image_path + '\nusing Azure Computer Vision API...'
+    )
 
     # Replace <Subscription Key> with your valid subscription key.
     subscription_key = "f21b4f194bb1480c8dde294d9baf18e7"
@@ -82,7 +99,8 @@ def AzureVision(image_path):
     # Free trial subscription keys are generated in the "westus" region.
     # If you use a free trial subscription key, you shouldn't need to change
     # this region.
-    vision_base_url = "https://southeastasia.api.cognitive.microsoft.com/vision/v2.0/"
+    vision_base_url = ("https://southeastasia.api.cognitive.microsoft.com/"
+                       + "vision/v2.0/")
 
     print('LOG: Using vision base url ' + vision_base_url)
 
@@ -96,16 +114,17 @@ def AzureVision(image_path):
     print('LOG: Reading the image into a byte array...')
     # Read the image into a byte array
     image_data = open(image_path, "rb").read()
-    headers    = {'Ocp-Apim-Subscription-Key': subscription_key,
-                  'Content-Type': 'application/octet-stream'}
-    params     = {'visualFeatures': 'Categories,Description,Color'}
+    headers = {'Ocp-Apim-Subscription-Key': subscription_key,
+               'Content-Type': 'application/octet-stream'}
+    params = {'visualFeatures': 'Categories,Description,Color'}
     response = requests.post(
         analyze_url, headers=headers, params=params, data=image_data)
     response.raise_for_status()
 
     print('LOG: Receiving JSON response...')
-    # The 'analysis' object (a dictionary) contains various fields that describe the image. The most
-    # relevant caption for the image is obtained from the 'description' property.
+    # The 'analysis' object (a dictionary) contains various fields that
+    # describe the image. The most relevant caption for the image
+    # is obtained from the 'description' property.
     analysis = response.json()
 
     print('LOG: JSON response received...')
@@ -115,12 +134,15 @@ def AzureVision(image_path):
 
     return analysis
 
+
 # Azure text-to-speech service
 class TextToSpeech(object):
-    # constructor for TextToSpeech object
-    #
-    # @param subscription_key: change to tts subscription_key
-    # @param text_candidate: text/string to be converted to speech audio file
+    '''
+    constructor for TextToSpeech object
+
+    @param subscription_key: change to tts subscription_key
+    @param text_candidate: text/string to be converted to speech audio file
+    '''
     def __init__(self, subscription_key, text_candidate):
         print('LOG: Initializing TextToSpeech object...')
         print('LOG: Using speech subscription_key ' + subscription_key)
@@ -137,7 +159,8 @@ class TextToSpeech(object):
     def get_token(self):
         print('LOG: Getting token...')
 
-        fetch_token_url = "https://southeastasia.api.cognitive.microsoft.com/sts/v1.0/issueToken"
+        fetch_token_url = ("https://southeastasia.api.cognitive.microsoft.com"
+                           + "/sts/v1.0/issueToken")
 
         print('LOG: Fetching token at ' + fetch_token_url)
 
@@ -149,8 +172,8 @@ class TextToSpeech(object):
 
     # function to save the generated speech as .wav audio file
     #
-    # @param filename_to_save: path and filename to save the audio file
-    def save_audio(self, filename_to_save):
+    # @param filename: path and filename to save the audio file
+    def save_audio(self, filename):
         print('LOG: Processing audio...')
 
         base_url = 'https://southeastasia.tts.speech.microsoft.com/'
@@ -169,20 +192,33 @@ class TextToSpeech(object):
         xml_body.set('{http://www.w3.org/XML/1998/namespace}lang', 'en-us')
         voice = ElementTree.SubElement(xml_body, 'voice')
         voice.set('{http://www.w3.org/XML/1998/namespace}lang', 'en-US')
-        voice.set('name', 'Microsoft Server Speech Text to Speech Voice (en-US, Guy24KRUS)')
+        voice.set(
+            'name',
+            'Microsoft Server Speech Text to Speech Voice (en-US, Guy24KRUS)'
+        )
         voice.text = self.tts
         body = ElementTree.tostring(xml_body)
 
         response = requests.post(constructed_url, headers=headers, data=body)
         if response.status_code == 200:
-            print('LOG: Saving audio as ' + filename_to_save + '...')
+            print('LOG: Saving audio as ' + filename + '...')
 
-            with open(filename_to_save + '.wav', 'wb') as audio:
+            with open(filename + '.wav', 'wb') as audio:
                 audio.write(response.content)
-                print("\nStatus code: " + str(response.status_code) + "\nYour TTS is ready for playback.\n")
+                print(
+                    "\nStatus code: "
+                    + str(response.status_code)
+                    + "\nYour TTS is ready for playback.\n"
+                )
 
         else:
-            print("\nStatus code: " + str(response.status_code) + "\nSomething went wrong. Check your subscription key and headers.\n")
+            print(
+                "\nStatus code: "
+                + str(response.status_code)
+                + "\nSomething went wrong. "
+                + "Check your subscription key and headers.\n"
+            )
+
 
 # / / / / / / / / / / / / / / / / / / / / / / /
 #
@@ -190,14 +226,22 @@ class TextToSpeech(object):
 #
 # / / / / / / / / / / / / / / / / / / / / / / /
 
-# Creates an instance of a speech config with specified subscription key and service region.
+soundDir = 'sounds/'
+
+# Creates an instance of a speech config with specified subscription key
+# and service region.
+
 # Replace with your own subscription key and service region (e.g., "westus").
-speech_key, speech_service_region = "d7f48f6fc6d34d6bae9b72814bbd0519", "southeastasia"
+speech_key, speech_service_region = ("d7f48f6fc6d34d6bae9b72814bbd0519",
+                                     "southeastasia")
 
 print('LOG: Using speech subscription key ' + speech_key)
 print('LOG: Speech service region at ' + speech_service_region)
 
-speech_config = speechsdk.SpeechConfig(subscription=speech_key, region=speech_service_region)
+speech_config = speechsdk.SpeechConfig(
+    subscription=speech_key,
+    region=speech_service_region
+)
 
 print('LOG: Creating speech recognizer...')
 
@@ -210,10 +254,12 @@ exit_status = 0
 while exit_status == 0:
     print("MIC RECORDING, Say something...")
 
-    # Performs speech recognition. recognize_once() returns when the first utterance has been recognized,
-    # so it is suitable only for single shot recognition like command or query. For long-running
-    # recognition, use start_continuous_recognition() instead, or if you want to run recognition in a
-    # non-blocking manner, use recognize_once_async().
+    # Performs speech recognition.
+    # recognize_once() returns when the first utterance has been recognized,
+    # so it is suitable only for single shot recognition like command or query.
+    # For long-running recognition, use start_continuous_recognition() instead,
+    # or if you want to run recognition in a non-blocking manner,
+    # use recognize_once_async().
     result = speech_recognizer.recognize_once()
 
     # Checks speech recognition result.
@@ -225,7 +271,7 @@ while exit_status == 0:
         if result.text == "Turn off.":
             exit_status = 1
 
-            Pyglet_playSound('goodbye.wav')
+            Pyglet_playSound(soundDir + 'goodbye.wav')
 
             time.sleep(3)
 
@@ -235,7 +281,7 @@ while exit_status == 0:
             # perform object recognition
             json_response = AzureVision("image.jpg")
 
-            #list to contain detected objects
+            # list to contain detected objects
             objects_detected = []
 
             # parse object names from JSON response
@@ -258,14 +304,16 @@ while exit_status == 0:
             # begin text-to-speech process using Azure tts service
             app = TextToSpeech(tts_subscription_key, tts_text_candidate)
             app.get_token()
-            app.save_audio('resultspeech.wav')
+            app.save_audio(soundDir + 'resultspeech')
 
             # calculate speech audio file duration
-            audio_path = 'resultspeech.wav'
+            audio_path = soundDir + 'resultspeech.wav'
             sleep_time = Calculate_soundFile_duration(audio_path)
 
             # play the speech audio file
-            # sound = pyglet.resource.media('resultspeech.wav', streaming=False)
+            # sound = pyglet.resource.media(
+            #   'resultspeech.wav', streaming=False
+            # )
             # sound.play()
             Pyglet_playSound(audio_path)
 
@@ -274,25 +322,34 @@ while exit_status == 0:
 
         # if the recognized speech is "Help.", play the 'helpMessage.wav' audio
         elif result.text == "Help.":
-            Pyglet_playSound('helpMessage.wav')
+            Pyglet_playSound(soundDir + 'helpMessage.wav')
 
             time.sleep(12)
 
         # if the recognized speech is other than above strings,
         # play the 'invalidCommand.wav' audio
         else:
-            Pyglet_playSound('invalidCommand.wav')
+            Pyglet_playSound(soundDir + 'invalidCommand.wav')
 
             time.sleep(7)
 
     # if no speech is detected/recognized, print the reason
     elif result.reason == speechsdk.ResultReason.NoMatch:
-        print("No speech could be recognized: {}".format(result.no_match_details))
+        print(
+            "No speech could be recognized: {}"
+            .format(result.no_match_details)
+        )
 
     # if speech recognition is canceled or error, print the reason
     elif result.reason == speechsdk.ResultReason.Canceled:
         cancellation_details = result.cancellation_details
-        print("Speech Recognition canceled: {}".format(cancellation_details.reason))
+        print(
+            "Speech Recognition canceled:"
+            + " {}".format(cancellation_details.reason)
+        )
 
         if cancellation_details.reason == speechsdk.CancellationReason.Error:
-            print("Error details: {}".format(cancellation_details.error_details))
+            print(
+                "Error details: {}"
+                .format(cancellation_details.error_details)
+            )
