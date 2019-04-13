@@ -252,6 +252,7 @@ speech_recognizer = speechsdk.SpeechRecognizer(speech_config=speech_config)
 exit_status = 0
 
 while exit_status == 0:
+    Pyglet_playSound(soundDir + 'notification.wav')
     print("MIC RECORDING, Say something...")
 
     # Performs speech recognition.
