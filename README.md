@@ -49,13 +49,9 @@ Install the following dependencies via pip:
   <br/>
 
 <h4>Material & documentations:</h4>
-  <br/>
   <h5>A Quickstart guide on using Azure Speech Services on Python</h5>
   https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/quickstart-python
   <br/>
   <h5>A Quickstart guide on using Azure Text-to-Speech on Python</h5>
   https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/quickstart-python-text-to-speech
-  <br/>
-  <h5>Object detection</h5>
-  https://towardsdatascience.com/object-detection-with-10-lines-of-code-d6cb4d86f606
   <br/>
