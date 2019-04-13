@@ -1,9 +1,10 @@
 <h1>UNCOVER PROJECT</h1>
 <h3>UNsighted COmputer Vision</h3>
-
+<br/>
+<br/>
 <h4>INTRO</h4>
 
-UNCOVer is a project to help sightless person to see objects and also reading text. In this github repository you will found the needed source codes to run the program on your own devices.
+UNCOVer is a project to help sightless person to see objects and also reading text. In this github repository you will found the needed source codes to run the program on your own device.
 
 <h4>WHAT DO YOU NEED</h4>
 
