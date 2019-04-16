@@ -85,35 +85,24 @@ def AzureVision(image_path):
         + image_path + '\nusing Azure Computer Vision API...'
     )
 
-    # Replace <Subscription Key> with your valid subscription key.
     subscription_key = "f21b4f194bb1480c8dde294d9baf18e7"
 
     print('LOG: Using vision subscription_key ' + subscription_key)
 
     assert subscription_key
 
-    # You must use the same region in your REST call as you used to get your
-    # subscription keys. For example, if you got your subscription keys from
-    # westus, replace "westcentralus" in the URI below with "westus".
-    #
-    # Free trial subscription keys are generated in the "westus" region.
-    # If you use a free trial subscription key, you shouldn't need to change
-    # this region.
     vision_base_url = ("https://southeastasia.api.cognitive.microsoft.com/"
                        + "vision/v2.0/")
 
     print('LOG: Using vision base url ' + vision_base_url)
 
-    # use /detect for object detections
-    #
-    # other uses can be read at
-    # https://westcentralus.dev.cognitive.microsoft.com/docs/services
-    # /5adf991815e1060e6355ad44/operations/5e0cdeda77a84fcd9a6d3d0a
     analyze_url = vision_base_url + "detect"
 
     print('LOG: Reading the image into a byte array...')
+
     # Read the image into a byte array
     image_data = open(image_path, "rb").read()
+
     headers = {'Ocp-Apim-Subscription-Key': subscription_key,
                'Content-Type': 'application/octet-stream'}
     params = {'visualFeatures': 'Categories,Description,Color'}
@@ -122,15 +111,10 @@ def AzureVision(image_path):
     response.raise_for_status()
 
     print('LOG: Receiving JSON response...')
-    # The 'analysis' object (a dictionary) contains various fields that
-    # describe the image. The most relevant caption for the image
-    # is obtained from the 'description' property.
+
     analysis = response.json()
 
     print('LOG: JSON response received...')
-
-    # print the JSON response
-    # print(analysis)
 
     return analysis
 
@@ -170,10 +154,13 @@ class TextToSpeech(object):
         response = requests.post(fetch_token_url, headers=headers)
         self.access_token = str(response.text)
 
-    # function to save the generated speech as .wav audio file
-    #
-    # @param filename: path and filename to save the audio file
     def save_audio(self, filename):
+        '''
+        function to save the generated speech as .wav audio file
+
+        @param filename: path and filename to save the audio file
+        '''
+
         print('LOG: Processing audio...')
 
         base_url = 'https://southeastasia.tts.speech.microsoft.com/'
